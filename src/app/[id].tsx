@@ -1,7 +1,7 @@
 import { Text, ActivityIndicator, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { fetchMovie } from '@/api/movie';
 import { addMovieToWatchList } from '@/api/watchlist';
@@ -12,6 +12,8 @@ import { View } from '@/components/Themed';
 
 const MovieDetail = () => {
   const { id } = useLocalSearchParams();
+
+  const client = useQueryClient();
 
   const {
     data: movie,
@@ -28,6 +30,11 @@ const MovieDetail = () => {
 
   const { mutate } = useMutation({
     mutationFn: () => addMovieToWatchList(id),
+    onSuccess: () => {
+      client.invalidateQueries({
+        queryKey: ['watchlist'],
+      });
+    },
   });
 
   if (isLoading) {
@@ -39,7 +46,7 @@ const MovieDetail = () => {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ title: movie?.id.toString() }} />
+      <Stack.Screen options={{ title: movie?.original_title }} />
       <View style={styles.imageContainer}>
         <Image
           source={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`}

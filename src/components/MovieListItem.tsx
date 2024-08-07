@@ -24,6 +24,7 @@ export default MovieListItem;
 
 const styles = StyleSheet.create({
   container: {
+    maxWidth: '50%',
     flex: 1,
     gap: 8,
     borderRadius: 16,

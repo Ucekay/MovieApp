@@ -8,7 +8,7 @@ import { Movie } from '@/types';
 
 export default function TabOneScreen() {
   const {
-    data: tvShows,
+    data: movies,
     isLoading,
     error,
   }: {
@@ -31,7 +31,7 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={tvShows}
+        data={movies}
         renderItem={({ item }) => <MovieListItem movie={item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
