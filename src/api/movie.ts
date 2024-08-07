@@ -5,8 +5,9 @@ const headers = {
   Authorization: `Bearer ${apiKey}`,
 };
 
-export const fetchTopRatedMovies = async () => {
-  const url = 'https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1';
+export const fetchTopRatedMovie = async () => {
+  const url =
+    'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
   const options = {
     method: 'GET',
     headers,
@@ -21,7 +22,7 @@ export const fetchTopRatedMovies = async () => {
 };
 
 export const fetchMovie = async (id: string | string[]) => {
-  const url = `https://api.themoviedb.org/3/tv/${id}?language=en-US`;
+  const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
   const options = {
     method: 'GET',
     headers,
@@ -33,6 +34,5 @@ export const fetchMovie = async (id: string | string[]) => {
     throw new Error('Failed to fetch data');
   }
   const json = await res.json();
-  console.log(json);
   return json;
 };

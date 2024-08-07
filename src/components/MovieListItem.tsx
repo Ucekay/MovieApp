@@ -1,10 +1,10 @@
 import { Pressable, Text, StyleSheet } from 'react-native';
 import { Image } from 'expo-image';
-import type { TVShow } from '@/types';
+import type { Movie } from '@/types';
 import { Link } from 'expo-router';
 
 interface MovieListItemProps {
-  movie: TVShow;
+  movie: Movie;
 }
 
 const MovieListItem = ({ movie }: MovieListItemProps) => {
@@ -27,12 +27,22 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 8,
     borderRadius: 16,
-    overflow: 'hidden',
     borderCurve: 'continuous',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+
+    elevation: 10,
   },
   image: {
     width: '100%',
     aspectRatio: 2 / 3,
+    borderRadius: 16,
+    borderCurve: 'continuous',
   },
   title: {
     fontSize: 16,

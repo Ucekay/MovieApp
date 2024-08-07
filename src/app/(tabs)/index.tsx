@@ -3,21 +3,21 @@ import { useQuery } from '@tanstack/react-query';
 
 import { View } from '@/components/Themed';
 import MovieListItem from '@/components/MovieListItem';
-import { fetchTopRatedMovies } from '@/api/movie';
-import { TVShow } from '@/types';
+import { fetchTopRatedMovie } from '@/api/movie';
+import { Movie } from '@/types';
 
 export default function TabOneScreen() {
   const {
-    data: movies,
+    data: tvShows,
     isLoading,
     error,
   }: {
-    data?: TVShow[];
+    data?: Movie[];
     isLoading: boolean;
     error: Error | null;
   } = useQuery({
     queryKey: ['movies'],
-    queryFn: fetchTopRatedMovies,
+    queryFn: fetchTopRatedMovie,
   });
 
   if (isLoading) {
@@ -31,12 +31,12 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={movies}
+        data={tvShows}
         renderItem={({ item }) => <MovieListItem movie={item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         columnWrapperStyle={{ gap: 16 }}
-        contentContainerStyle={{ gap: 16 }}
+        contentContainerStyle={{ padding: 16, gap: 16 }}
       />
     </View>
   );
@@ -45,6 +45,5 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
   },
 });
